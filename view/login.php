@@ -11,7 +11,7 @@
               <!-- Logo -->
               <div class="app-brand justify-content-center">
                 <span class="app-brand-logo demo" style="margin-right: 7px;">
-                  <img src="assets/img/logo.png"/>
+                  <img src="./assets/img/logo.png"/>
                 </span>
                 <span class="app-brand-text demo text-body fw-bolder">StockBox</span>
               </div>
