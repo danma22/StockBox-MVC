@@ -13,7 +13,7 @@ class StoreController {
     }
 
     public function addStorePage(){
-        $page = "Tiendas";
+        $page = "Añadir Tienda";
         include ("view/addStore.php");
     }
 }

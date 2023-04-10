@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="row justify-content-end">
-                          <div class="col-sm-10">
+                          <div class="col-sm-1">
                             <button type="submit" class="btn btn-primary">Enviar</button>
                           </div>
                         </div>
