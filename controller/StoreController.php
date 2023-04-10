@@ -2,8 +2,10 @@
 
 include "model/config.php";
 
-class LoginController {
+class StoreController {
     private $viewLogin = "view/login.php";
+    private $successPath = "success.php";
+    private $modelProvincie = "model/DAOprovince.php";
     private $modelUser = "model/UserModel.php";
 
 

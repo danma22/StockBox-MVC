@@ -4,6 +4,6 @@
 // a la página indicada
 require_once "controller/MainController.php";
 $controller = new MainController();
-$controller->route();
+echo $controller->route();
 
 ?>

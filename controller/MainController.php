@@ -17,7 +17,7 @@ class MainController{
         include_once './controller/'.$controller.'.php';
 
         $controller = new $controller();
-        $controller->$action("");
+        return $controller->$action("");
     }
 }
 
