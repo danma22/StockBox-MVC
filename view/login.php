@@ -11,7 +11,7 @@
               <!-- Logo -->
               <div class="app-brand justify-content-center">
                 <span class="app-brand-logo demo" style="margin-right: 7px;">
-                  <img src="view/assets/img/logo.png"/>
+                  <img src="assets/img/logo.png"/>
                 </span>
                 <span class="app-brand-text demo text-body fw-bolder">StockBox</span>
               </div>
@@ -51,19 +51,19 @@
     
     <!-- Core JS -->
     <!-- build:js view/assets/vendor/js/core.js -->
-    <script src="view/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="view/assets/vendor/libs/popper/popper.js"></script>
-    <script src="view/assets/vendor/js/bootstrap.js"></script>
-    <script src="view/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="assets/vendor/libs/popper/popper.js"></script>
+    <script src="assets/vendor/js/bootstrap.js"></script>
+    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="view/assets/vendor/js/menu.js"></script>
+    <script src="assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="view/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="view/assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 
     <!-- Page JS -->
     <script src="view/js/login.js"></script>
