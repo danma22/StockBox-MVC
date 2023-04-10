@@ -7,9 +7,16 @@ class LoginController {
     private $modelUser = "model/UserModel.php";
 
 
-    public function loadPage($popup){
+    public function loadPage(){
         $page = "Log in";
         include ($this->viewLogin);
+    }
+
+    public function logOut($popup){
+        session_start();
+        $_SESSION = array();
+        session_destroy();
+        $this->loadPage();
     }
 
     private function requireModelUser(){
@@ -35,7 +42,7 @@ class LoginController {
                 
                 //var_dump($_REQUEST);
                 
-                return json_encode(array('exito' => true, 'url' => 'view/dashboard.php'));
+                return json_encode(array('exito' => true, 'url' => 'index.php?controller=StoreController&action=loadPage'));
             } else {
                 return json_encode(array('exito' => false));
             }
