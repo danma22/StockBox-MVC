@@ -1,10 +1,13 @@
 <?php
 
+// Se llama a las constantes del archivo de configuración
 include "model/config.php";
 
+// Clase Database que permite tener la conexión con la base de datos
 class Database {
     private static $connection;
     
+    // A través de PDO se realiza la conexión y se devuelve para utilizarla en las consultas
     public static function getConnection(){
         if(!isset(self::$connection)){
             try{
@@ -18,20 +21,23 @@ class Database {
         }
         return self::$connection;
     }
-	
+    
+    // Este método permite ejecutar cualquier tipo de sentencia y devolver una respuesta
 	public static function execute($query, $parameter = null) {
         try {
+            // Se trae la conexión con la BD
             $db = self::getConnection();
+            // Se prepara la sentencia
             $stmt = $db->prepare($query);
 
-            // binding parameter
+            // Se hace un binding de todos los parámetros indicados
 			if ($parameter != null) {
 				foreach ($parameter as $key => $param) {
 					$stmt->bindValue(':'.$key, $param);
                 }
             }
             
-            //executing and returning
+            // Se ejecuta la sentencia y se devuelve la respuesta
             $stmt->execute();
             try {
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

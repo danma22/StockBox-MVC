@@ -1,4 +1,5 @@
 <?php
+// Se trae el código para conectar con la base de datos
 require_once "model/db.php";
 
 // Método para insertar una tienda
