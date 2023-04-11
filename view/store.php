@@ -2,6 +2,8 @@
 <?php
   session_start();
   include_once "layouts/header.php"; 
+  include_once "model/StoreModel.php";
+  $stores = getStores()
 ?>
 
     <!-- Layout wrapper -->
@@ -20,6 +22,8 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"> Tiendas</h4>
+
               <table id="example" class="display table-responsive text-nowrap" style="width:100%">
                 <thead>
                   <tr>
@@ -30,55 +34,39 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>8</td>
-                    <td>System Architect</td>
-                    <td><span class="badge rounded-pill bg-label-success">Activo</span></td>
-                    <td>
-                      <div class="dropdown">
-                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="javascript:void(0);"
-                            ><i class="bx bx-door-open me-1"></i> Ingresa</a
-                          >
-                          <a class="dropdown-item" href="javascript:void(0);"
-                            ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                          >
-                          <a class="dropdown-item" href="javascript:void(0);"
-                            ><i class="bx bx-trash me-1"></i> Delete</a
-                          >
-                          
+                  <?php foreach ($stores as $key => $data) { ?>
+                    <tr>
+                      <td><?php echo $data['id'] ?></td>
+                      <td><?php echo $data['name'] ?></td>
+                      <td>
+                        <?php if ($data['active'] == 1) { ?>
+                          <span class="badge rounded-pill bg-label-success">Activo</span>
+                        <?php } else { ?>
+                          <span class="badge rounded-pill bg-label-danger">Inactivo</span>
+                        <?php } ?>
+                      </td>
+                      <td>
+                        <div class="dropdown">
+                          <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                          </button>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              <i class="bx bx-door-open me-1"></i> Ingresa
+                            </a>
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              <i class="bx bx-edit-alt me-1"></i> Editar
+                            </a>
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              <i class="bx bx-trash me-1"></i> Eliminar
+                            </a>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
 
-                  <tr>
-                    <td>16</td>
-                    <td>Doña Tota</td>
-                    <td><span class="badge rounded-pill bg-label-danger">Inactivo</span></td>
-                    <td>
-                      <div class="dropdown">
-                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="javascript:void(0);"
-                            ><i class="bx bx-door-open me-1"></i> Ingresa</a
-                          >
-                          <a class="dropdown-item" href="javascript:void(0);"
-                            ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                          >
-                          <a class="dropdown-item" href="javascript:void(0);"
-                            ><i class="bx bx-trash me-1"></i> Delete</a
-                          >
-                          
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                  <?php } ?>
+
                 </tbody>
                 <tfoot>
                   <tr>

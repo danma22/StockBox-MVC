@@ -20,7 +20,16 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"> Formulario</h4>
+              <h4 class="fw-bold py-3 mb-4"> Tiendas</h4>
+
+              <div class="bs-toast toast toast-placement-ex m-2 fade bg-success top-0 end-0 hide" id="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                <div class="toast-header">
+                  <i class="bx bx-bell me-2"></i>
+                  <div class="me-auto fw-semibold" id="toastHeader"></div>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastBody"> </div>
+              </div>
 
               <!-- Basic Layout & Basic with Icons -->
               <div class="row">
@@ -28,11 +37,12 @@
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                      <h5 class="mb-0">Añadir tienda</h5>
+                      <h5 class="mb-0"><?php echo $page ?></h5>
                     </div>
 
                     <div class="card-body">
-                      <form>
+                      <div class="alert alert-danger" role="alert" id="alert" style="display:none"></div>
+                      <form id="addStoreForm" method="POST">
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Nombre</label>
                           <div class="col-sm-10">
@@ -40,14 +50,7 @@
                               <span id="basic-icon-default-company2" class="input-group-text">
                                 <i class="bx bx-buildings"></i>
                               </span>
-                              <input
-                                type="text"
-                                id="basic-icon-default-company"
-                                class="form-control"
-                                placeholder="Doña Tota"
-                                aria-label="Doña Tota"
-                                aria-describedby="basic-icon-default-company2"
-                              />
+                              <input type="text" id="name" name="name" class="form-control" placeholder="Nombre de la tienda"/>
                             </div>
                           </div>
                         </div>
@@ -57,12 +60,12 @@
                           <div class="col-sm-10">
                             <div class="row">
                               <div class="form-check col-sm-1">
-                                <input class="form-check-input" type="radio" value="1" name="activo" checked/>
-                                <label class="form-check-label" for="defaultCheck1"> Activo </label>
+                                <input class="form-check-input" type="radio" value="1" name="active" id="activo" checked/>
+                                <label class="form-check-label" for="activo"> Activo </label>
                               </div>
                               <div class="form-check col-sm-1">
-                                <input class="form-check-input" type="radio" value="0" name="activo" />
-                                <label class="form-check-label" for="defaultCheck3"> Desactivado </label>
+                                <input class="form-check-input" type="radio" value="0" name="active" id="inactivo" />
+                                <label class="form-check-label" for="inactivo"> Inactivo </label>
                               </div>
                             </div>
                           </div>
@@ -70,7 +73,7 @@
 
                         <div class="row justify-content-end">
                           <div class="col-sm-1">
-                            <button type="submit" class="btn btn-primary">Enviar</button>
+                            <input type="submit" class="btn btn-primary" value="Enviar" name="submit">
                           </div>
                         </div>
                       </form>
@@ -93,6 +96,7 @@
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
+
     </div>
     <!-- / Layout wrapper -->
 
@@ -113,13 +117,7 @@
     <script src="assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script type="text/javascript" language="javascript" src="assets/datatables/js/jquery.dataTables.js"></script>
-
-    <script>
-      $(document).ready(function () {
-          $('#example').DataTable();
-      });
-    </script>
+    <script src="view/js/store.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

@@ -36,66 +36,13 @@ class Database {
             try {
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }catch(PDOException $e){
-                $result = true; //è un insert o un delete o un update
+                $result = array(false);
             }
             
             return $result;
         }catch(PDOException $e){
             echo "Connection failed: " . $e->getMessage();
         }
-    }
-
-    public static function getTuples($columns = null, $table, $join = null, $data = null, $end = null){
-        $queryStart = "SELECT ";
-        $queryFrom = " FROM ";
-        $queryJoin = "";
-        $queryWhere = "";
-        $queryEnd = "";
-    
-        //Select colums clause creation
-        if ($columns != null) {
-            $colNumber = count($columns);//mumero delle colonne
-            foreach ($columns as $column) {
-                $queryStart = $queryStart." ".$column;
-                $colNumber--;
-                if($colNumber > 0){
-                    $queryStart = $queryStart.", ";
-                }
-            }
-        } else {
-            $queryStart = $queryStart." * "; //tutte le colonne di default
-        }
-    
-        //From clause creation
-        $queryFrom = $queryFrom." ".$table;
-    
-        //Join clause creation
-        $queryJoin = $queryJoin." ".$join;
-    
-        //Where clause creation
-        if ($data != null) {
-            $queryWhere = " WHERE ";
-            $whereBlocks = count($data);
-            //if($whereBlocks)
-            foreach ($data as $key => $param) {
-                $queryWhere = $queryWhere." ".$key."=:".$key;
-                $whereBlocks--;
-                if($whereBlocks > 0){
-                    $queryWhere = $queryWhere." AND";
-                }
-            }
-        }
-
-        //End clause creation
-        $queryEnd = $queryEnd." ".$end;
-
-        //unione dei componenti della query
-        $query = $queryStart." ".$queryFrom." ".$queryJoin." ".$queryWhere." ".$queryEnd;
-        
-        $return = self::execute($query, $data);
-        //print_r($return);
-
-        return $return;
     }
 	
 }
