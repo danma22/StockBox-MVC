@@ -7,13 +7,29 @@ class StoreController {
 
 
     public function loadPage(){
-        $page = "Tiendas";
+        $this->validateSession();
+        $page = array("Tiendas", "itemTiendas");
         include ($this->viewDashboard);
     }
 
-    public function addStorePage(){
-        $page = "Añadir Tienda";
+    public function updateStorePage($id_store){
+        $id_store = (int)$id_store;
+        $this->validateSession();
+        $page = array("Actualizar Tienda", "");
         include ("view/addStore.php");
+    }
+
+    public function addStorePage(){
+        $this->validateSession();
+        $page = array("Añadir Tienda", "itemAddTiendas");
+        include ("view/addStore.php");
+    }
+
+    private function validateSession(){
+        session_start();
+        if (count($_SESSION) == 0){
+            header("Location: index.php");
+        }
     }
 
     private function requireModelStore(){

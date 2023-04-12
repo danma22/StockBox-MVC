@@ -29,4 +29,15 @@ function getStores(){
     return $stores;
 }
 
+
+function getStore($id){
+    $query = "SELECT name, active FROM Store WHERE id=:id";
+    $data = array('id' => $id);
+    
+    $result = Database::execute($query, $data);
+    $store = $result[0];
+
+    return $store;
+}
+
 ?>

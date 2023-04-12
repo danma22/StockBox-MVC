@@ -3,7 +3,7 @@
 // Clase MainController que permite redirigir las rutas de acuerdo al controlador y la acción indicada
 class MainController{
     public function route(){
-        // Se verifica si existe una variable controlador 
+        // Se verifica si existe una variable controlador
         if(isset($_GET['controller'])){
             $controller = $_GET['controller'];
         }else{

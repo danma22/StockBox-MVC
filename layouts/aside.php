@@ -1,4 +1,5 @@
 <!-- Menu -->
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
@@ -21,13 +22,13 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Tiendas</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item" id="itemTiendas">
             <a href="index.php?controller=StoreController&action=loadPage" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-store"></i>
                 <div data-i18n="Store">Tiendas</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item" id="itemAddTiendas">
             <a href="index.php?controller=StoreController&action=addStorePage" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-customize"></i>
                 <div data-i18n="AddStore">Añadir tienda</div>
@@ -40,13 +41,13 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">General</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item" id="itemInicio">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-alt"></i>
                 <div data-i18n="Home">Inicio</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item" id="itemUsuarios">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Users">Usuarios</div>
@@ -57,13 +58,13 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Stock</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item" id="itemInventario">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-package"></i>
                 <div data-i18n="Inventario">Inventario</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item" id="itemCategorias">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category-alt"></i>
                 <div data-i18n="Category">Categorias</div>
@@ -74,13 +75,13 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Ventas</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item" id="itemVenta">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-coin"></i>
                 <div data-i18n="Inventario">Realizar venta</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item" id="itemHistorialVenta">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-coin-stack"></i>
                 <div data-i18n="Category">Historial de ventas</div>

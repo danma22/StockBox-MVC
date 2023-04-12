@@ -2,6 +2,14 @@
 <?php
   session_start();
   include_once "layouts/header.php"; 
+  include_once "model/StoreModel.php";
+
+  $store_data = array();
+  if (isset($id_store)) {
+    $store_data = getStore($id_store);
+  } else {
+    $id_store = "";
+  }
 ?>
 
     <!-- Layout wrapper -->
@@ -37,12 +45,13 @@
                 <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                      <h5 class="mb-0"><?php echo $page ?></h5>
+                      <h5 class="mb-0"><?php echo $page[0] ?></h5>
                     </div>
 
                     <div class="card-body">
                       <div class="alert alert-danger" role="alert" id="alert" style="display:none"></div>
                       <form id="addStoreForm" method="POST">
+                        <input type="hidden" name="id" id="id" value="<?php echo $id_store ?>">
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Nombre</label>
                           <div class="col-sm-10">
@@ -50,7 +59,12 @@
                               <span id="basic-icon-default-company2" class="input-group-text">
                                 <i class="bx bx-buildings"></i>
                               </span>
-                              <input type="text" id="name" name="name" class="form-control" placeholder="Nombre de la tienda"/>
+                              <?php if (count($store_data) == 1) { ?>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Nombre de la tienda" value="<?php echo $store_data['name'] ?>"/>
+                              <?php } else { ?>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Nombre de la tienda"/>
+                              <?php } ?>
+                              
                             </div>
                           </div>
                         </div>
@@ -59,14 +73,36 @@
                           <label class="col-sm-2 col-form-label" for="basic-icon-default-company">¿Activo?</label>
                           <div class="col-sm-10">
                             <div class="row">
-                              <div class="form-check col-sm-1">
-                                <input class="form-check-input" type="radio" value="1" name="active" id="activo" checked/>
-                                <label class="form-check-label" for="activo"> Activo </label>
-                              </div>
-                              <div class="form-check col-sm-1">
-                                <input class="form-check-input" type="radio" value="0" name="active" id="inactivo" />
-                                <label class="form-check-label" for="inactivo"> Inactivo </label>
-                              </div>
+                              <?php if (count($store_data) == 1) { ?>
+                                <?php if ($store_data['active'] == 1) { ?>
+                                  <div class="form-check col-sm-1">
+                                    <input class="form-check-input" type="radio" value="1" name="active" id="activo" checked/>
+                                    <label class="form-check-label" for="activo"> Activo </label>
+                                  </div>
+                                  <div class="form-check col-sm-1">
+                                    <input class="form-check-input" type="radio" value="0" name="active" id="inactivo" />
+                                    <label class="form-check-label" for="inactivo"> Inactivo </label>
+                                  </div>
+                                <?php } else if ($store_data['active'] == 0) { ?>
+                                  <div class="form-check col-sm-1">
+                                    <input class="form-check-input" type="radio" value="1" name="active" id="activo"/>
+                                    <label class="form-check-label" for="activo"> Activo </label>
+                                  </div>
+                                  <div class="form-check col-sm-1">
+                                    <input class="form-check-input" type="radio" value="0" name="active" id="inactivo" checked/>
+                                    <label class="form-check-label" for="inactivo"> Inactivo </label>
+                                  </div>
+                                <?php } ?>
+                              <?php } else { ?>
+                                <div class="form-check col-sm-1">
+                                  <input class="form-check-input" type="radio" value="1" name="active" id="activo"/>
+                                  <label class="form-check-label" for="activo"> Activo </label>
+                                </div>
+                                <div class="form-check col-sm-1">
+                                  <input class="form-check-input" type="radio" value="0" name="active" id="inactivo" />
+                                  <label class="form-check-label" for="inactivo"> Inactivo </label>
+                                </div>
+                              <?php } ?>
                             </div>
                           </div>
                         </div>
@@ -118,6 +154,15 @@
 
     <!-- Page JS -->
     <script src="view/js/store.js"></script>
+
+    <?php 
+      if ($page[1] != "") {
+        echo "<script>
+            $('.menu-item').removeClass('active');
+            $('#".$page[1]."').addClass('active');
+        </script>"; 
+      }
+    ?>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

@@ -54,7 +54,7 @@
                             <a class="dropdown-item" href="javascript:void(0);">
                               <i class="bx bx-door-open me-1"></i> Ingresa
                             </a>
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item" href="index.php?controller=StoreController&action=updateStorePage&data=<?php echo $data['id']?>">
                               <i class="bx bx-edit-alt me-1"></i> Editar
                             </a>
                             <a class="dropdown-item" href="javascript:void(0);">
@@ -120,6 +120,15 @@
           $('#example').DataTable();
       });
     </script>
+
+    <?php 
+      if ($page[1] == "") {
+        echo "<script>
+            $('.menu-item').removeClass('active');
+            $('#".$page[1]."').addClass('active');
+        </script>"; 
+      }
+    ?>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
