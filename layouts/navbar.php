@@ -7,6 +7,12 @@
             <i class="bx bx-menu bx-sm"></i>
         </a>
     </div>
+    <?php if (isset($_SESSION['name_store'])) { ?>
+        <div class="col-2">
+            <span class="fw-semibold d-block">Tienda: <?php echo $_SESSION['name_store'] ?> </span>
+        </div>
+        
+    <?php } ?>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <ul class="navbar-nav flex-row align-items-center ms-auto">

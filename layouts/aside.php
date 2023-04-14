@@ -17,7 +17,7 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <?php if ($_SESSION['type'] == 1) { ?>
+        <?php if ($_SESSION['type'] == 1 && $_SESSION['id_store'] == -1) { ?>
         <!-- Tiendas -->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Tiendas</span>
@@ -42,7 +42,7 @@
             <span class="menu-header-text">General</span>
         </li>
         <li class="menu-item" id="itemInicio">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="index.php?controller=DashboardController&action=loadPage" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-alt"></i>
                 <div data-i18n="Home">Inicio</div>
             </a>
@@ -65,7 +65,7 @@
             </a>
         </li>
         <li class="menu-item" id="itemCategorias">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="index.php?controller=CategoriesController&action=loadPage" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category-alt"></i>
                 <div data-i18n="Category">Categorias</div>
             </a>

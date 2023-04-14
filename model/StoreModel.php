@@ -16,6 +16,34 @@ function insertStore($data){
     return false;
 }
 
+// Método para actualizar una tienda
+function updateStore($data){
+    $query = "UPDATE Store SET name=:name, active=:active WHERE id=:id";
+
+    $result = Database::execute($query, $data);
+    if(count($result) == 0){
+        // Se devuelve true si se realizó la ejecución
+        return true;
+    }
+
+    // Si no, entonce se devuelve false
+    return false;
+}
+
+// Método para eliminar una tienda
+function deleteStore($data){
+    $query = "DELETE FROM Store WHERE id=:id";
+
+    $result = Database::execute($query, $data);
+    if(count($result) == 0){
+        // Se devuelve true si se realizó la ejecución
+        return true;
+    }
+
+    // Si no, entonce se devuelve false
+    return false;
+}
+
 // Método para consultar todas las tiendas
 function getStores(){
     $query = "SELECT id, name, active FROM Store";
@@ -29,8 +57,19 @@ function getStores(){
     return $stores;
 }
 
+// Método para consultar todas las tiendas
+function getNameStore($id){
+    $query = "SELECT name FROM Store WHERE id=:id";
+    $data = array('id' => $id);
+    
+    $result = Database::execute($query, $data);
+    $name = $result[0]['name'];
 
-function getStore($id){
+    return $name;
+}
+
+
+function searchStore($id){
     $query = "SELECT name, active FROM Store WHERE id=:id";
     $data = array('id' => $id);
     

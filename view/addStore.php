@@ -6,7 +6,7 @@
 
   $store_data = array();
   if (isset($id_store)) {
-    $store_data = getStore($id_store);
+    $store_data = searchStore($id_store);
   } else {
     $id_store = "";
   }
@@ -30,6 +30,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4"> Tiendas</h4>
 
+              <!-- Toast  -->
               <div class="bs-toast toast toast-placement-ex m-2 fade bg-success top-0 end-0 hide" id="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
                 <div class="toast-header">
                   <i class="bx bx-bell me-2"></i>
@@ -38,6 +39,7 @@
                 </div>
                 <div class="toast-body" id="toastBody"> </div>
               </div>
+              <!-- / Toast  -->
 
               <!-- Basic Layout & Basic with Icons -->
               <div class="row">
@@ -59,7 +61,7 @@
                               <span id="basic-icon-default-company2" class="input-group-text">
                                 <i class="bx bx-buildings"></i>
                               </span>
-                              <?php if (count($store_data) == 1) { ?>
+                              <?php if (count($store_data) != 0) { ?>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Nombre de la tienda" value="<?php echo $store_data['name'] ?>"/>
                               <?php } else { ?>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Nombre de la tienda"/>
@@ -73,32 +75,32 @@
                           <label class="col-sm-2 col-form-label" for="basic-icon-default-company">¿Activo?</label>
                           <div class="col-sm-10">
                             <div class="row">
-                              <?php if (count($store_data) == 1) { ?>
+                              <?php if (count($store_data) != 0) { ?>
                                 <?php if ($store_data['active'] == 1) { ?>
-                                  <div class="form-check col-sm-1">
+                                  <div class="form-check col-sm-2">
                                     <input class="form-check-input" type="radio" value="1" name="active" id="activo" checked/>
                                     <label class="form-check-label" for="activo"> Activo </label>
                                   </div>
-                                  <div class="form-check col-sm-1">
+                                  <div class="form-check col-sm-2">
                                     <input class="form-check-input" type="radio" value="0" name="active" id="inactivo" />
                                     <label class="form-check-label" for="inactivo"> Inactivo </label>
                                   </div>
                                 <?php } else if ($store_data['active'] == 0) { ?>
-                                  <div class="form-check col-sm-1">
+                                  <div class="form-check col-sm-2">
                                     <input class="form-check-input" type="radio" value="1" name="active" id="activo"/>
                                     <label class="form-check-label" for="activo"> Activo </label>
                                   </div>
-                                  <div class="form-check col-sm-1">
+                                  <div class="form-check col-sm-2">
                                     <input class="form-check-input" type="radio" value="0" name="active" id="inactivo" checked/>
                                     <label class="form-check-label" for="inactivo"> Inactivo </label>
                                   </div>
                                 <?php } ?>
                               <?php } else { ?>
-                                <div class="form-check col-sm-1">
+                                <div class="form-check col-sm-2">
                                   <input class="form-check-input" type="radio" value="1" name="active" id="activo"/>
                                   <label class="form-check-label" for="activo"> Activo </label>
                                 </div>
-                                <div class="form-check col-sm-1">
+                                <div class="form-check col-sm-2">
                                   <input class="form-check-input" type="radio" value="0" name="active" id="inactivo" />
                                   <label class="form-check-label" for="inactivo"> Inactivo </label>
                                 </div>

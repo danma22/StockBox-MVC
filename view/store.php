@@ -24,6 +24,17 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4"> Tiendas</h4>
 
+              <!-- Toast  -->
+              <div class="bs-toast toast toast-placement-ex m-2 fade bg-success top-0 end-0 hide" id="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                <div class="toast-header">
+                  <i class="bx bx-bell me-2"></i>
+                  <div class="me-auto fw-semibold" id="toastHeader"></div>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastBody"> </div>
+              </div>
+              <!-- / Toast  -->
+
               <table id="example" class="display table-responsive text-nowrap" style="width:100%">
                 <thead>
                   <tr>
@@ -51,13 +62,13 @@
                             <i class="bx bx-dots-vertical-rounded"></i>
                           </button>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item" href="index.php?controller=StoreController&action=loadStoreDashboard&data=<?php echo $data['id']?>"">
                               <i class="bx bx-door-open me-1"></i> Ingresa
                             </a>
                             <a class="dropdown-item" href="index.php?controller=StoreController&action=updateStorePage&data=<?php echo $data['id']?>">
                               <i class="bx bx-edit-alt me-1"></i> Editar
                             </a>
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item" href="index.php?controller=StoreController&action=delStore&data=<?php echo $data['id']?>">
                               <i class="bx bx-trash me-1"></i> Eliminar
                             </a>
                           </div>
@@ -122,7 +133,7 @@
     </script>
 
     <?php 
-      if ($page[1] == "") {
+      if ($page[1] != "") {
         echo "<script>
             $('.menu-item').removeClass('active');
             $('#".$page[1]."').addClass('active');

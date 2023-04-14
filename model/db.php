@@ -47,6 +47,7 @@ class Database {
             
             return $result;
         }catch(PDOException $e){
+            return array(false);
             echo "Connection failed: " . $e->getMessage();
         }
     }

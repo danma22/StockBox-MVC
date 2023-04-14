@@ -2,16 +2,28 @@
 
 // Clase LoginController: Se encarga de la comunicación entre el modelo del usuario y las vistas y rutas relacionadas con el inicio de sesión
 class StoreController {
-    private $viewDashboard = "view/store.php";
+    // Vista de la tabla de tiendas
+    private $viewStores = "view/store.php";
+    // Modelo de tiendas
     private $modelStore = "model/StoreModel.php";
 
-
+    // Método para cargar la página
     public function loadPage(){
         $this->validateSession();
         $page = array("Tiendas", "itemTiendas");
-        include ($this->viewDashboard);
+        include ($this->viewStores);
     }
 
+    // Método para cargar el dashboard de la tienda seleccionada
+    public function loadStoreDashboard($id_store){
+        session_start();
+        $this->requireModelStore();
+        $_SESSION['id_store'] = (int)$id_store;
+        $_SESSION['name_store'] = getNameStore($id_store);
+        header("Location: index.php?controller=DashboardController&action=loadPage");
+    }
+
+    // Método para mostrar la vista para actualizar una tienda
     public function updateStorePage($id_store){
         $id_store = (int)$id_store;
         $this->validateSession();
@@ -19,12 +31,14 @@ class StoreController {
         include ("view/addStore.php");
     }
 
+    // Método para mostrar la vista para añadir una tineda 
     public function addStorePage(){
         $this->validateSession();
         $page = array("Añadir Tienda", "itemAddTiendas");
         include ("view/addStore.php");
     }
 
+    // Método para validar si ya se inicio sesión
     private function validateSession(){
         session_start();
         if (count($_SESSION) == 0){
@@ -32,10 +46,12 @@ class StoreController {
         }
     }
 
+    // Método para obtener el código del modelo de tienda
     private function requireModelStore(){
         require_once $this->modelStore;
     }
 
+    // Método para enviar los datos del formulario para añadir una tienda
     public function addStore(){
         if(isset($_POST['name']) && isset($_POST['active'])){
             session_start(); // Se inicia la sesión
@@ -54,6 +70,47 @@ class StoreController {
                 return json_encode(array('exito' => false));
             }
         }
+    }
+
+    // Método para enviar los datos del formulario para actualizar una tienda
+    public function updStore(){
+        if(isset($_POST['name']) && isset($_POST['active']) && isset($_POST['id'])){
+            session_start(); // Se inicia la sesión
+            $this->requireModelStore(); // Se llama a los métodos del modelo de tiendas
+        
+            $name =  $_POST['name'];
+            $active =  $_POST['active'];
+            $id = $_POST['id'];
+            $data = array('name'=>$name,'active'=>$active, 'id'=>$id); // Los valores a actualizar en un registro de tienda
+            
+            // Se actualiza el registro
+            $result = updateStore($data);
+
+            if ($result) {
+                return json_encode(array('exito' => true));
+            } else {
+                return json_encode(array('exito' => false));
+            }
+        }
+    }
+
+    // Método para enviar los datos del formulario para eliminarlo
+    public function delStore($id){
+        session_start(); // Se inicia la sesión
+        $this->requireModelStore(); // Se llama a los métodos del modelo de tiendas
+
+        $data = array('id'=>$id); // Registro a eliminar
+        
+        // Se elimina el registro
+        $result = deleteStore($data);
+
+        header("Location: index.php?controller=StoreController&action=loadPage");
+
+        // if ($result) {
+        //     return json_encode(array('exito' => true));
+        // } else {
+        //     return json_encode(array('exito' => false));
+        // }
     }
 }
 
