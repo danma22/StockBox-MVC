@@ -10,7 +10,7 @@ class LoginController {
 
     // Método que carga la vista de login
     public function loadPage(){
-        $page = "Log in";
+        $page = array("Log in", "");
         include ($this->viewLogin);
     }
     
