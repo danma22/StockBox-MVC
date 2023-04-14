@@ -30,7 +30,7 @@
                       </div>
                       <span class="fw-semibold d-block mb-1">Total de productos</span>
                       <h3 class="card-title text-nowrap mb-2 text-success">234</h3>
-                      <button type="submit" class="btn btn-secondary d-grid w-100" name="submit">Ver más</button>
+                      <a class="btn btn-secondary d-grid w-100" name="submit" href="">Ver más</a>
                     </div>
                   </div>
                 </div>
@@ -45,7 +45,7 @@
                       </div>
                       <span class="fw-semibold d-block mb-1">Total de usuarios</span>
                       <h3 class="card-title text-nowrap mb-2 text-success">23</h3>
-                      <button type="submit" class="btn btn-secondary d-grid w-100" name="submit">Ver más</button>
+                      <a class="btn btn-secondary d-grid w-100" name="submit" href="">Ver más</a>
                     </div>
                   </div>
                 </div>
@@ -60,7 +60,7 @@
                       </div>
                       <span class="fw-semibold d-block mb-1">Total de categorias</span>
                       <h3 class="card-title text-nowrap mb-2 text-success">6</h3>
-                      <button type="submit" class="btn btn-secondary d-grid w-100" name="submit">Ver más</button>
+                      <a class="btn btn-secondary d-grid w-100" name="submit" href="index.php?controller=CategoriesController&action=loadPage">Ver más</a>
                     </div>
                   </div>
                 </div>

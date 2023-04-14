@@ -38,7 +38,7 @@ class LoginController {
             $filterCredential = array('username'=>$username,'password'=>$password); // Se reune las credenciales por medio de un array 
             
             // Se solicita la información del usuario para verificar si existe
-            $result = getUsers($filterCredential); 
+            $result = searchUserLogin($filterCredential); 
             
             // si se trae al menos una consulta, se guarda los datos en una variable SESSION
             if(count($result) == 1){

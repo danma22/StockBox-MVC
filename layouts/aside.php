@@ -48,7 +48,7 @@
             </a>
         </li>
         <li class="menu-item" id="itemUsuarios">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="index.php?controller=UserController&action=loadPage" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Users">Usuarios</div>
             </a>
