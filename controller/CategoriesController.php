@@ -2,19 +2,31 @@
 
 // Clase CategoriesController: Se encarga de la comunicación entre el modelo de categorias y las vistas y rutas relacionadas con las categorias
 class CategoriesController {
+    // Vista de la tabla de categorias
     private $viewCategories = "view/categories.php";
+    // Modelo de categorias
     private $modelCategories = "model/CategoriesModel.php";
 
-
+    // Método para cargar la página
     public function loadPage(){
         $this->validateSession();
         $page = array("Categorias", "itemCategorias");
         include ($this->viewCategories);
     }
 
+    // Método para mostrar la vista para actualizar una categoria
+    public function updateCategoriesPage($id_category){
+        $id_category = (int)$id_category;
+        $this->validateSession();
+        $page = array("Actualizar Categoria", "");
+        include ("view/addCategory.php");
+    }
+
+    // Método para mostrar la vista para añadir una categoria 
     public function addCategoriesPage(){
-        $page = "Añadir Categorias";
-        include ("view/addCategories.php");
+        $this->validateSession();
+        $page = array("Añadir Categorias", "");
+        include ("view/addCategory.php");
     }
 
     // Método para validar si ya se inicio sesión
@@ -25,20 +37,20 @@ class CategoriesController {
         }
     }
 
+    // Método para obtener el código del modelo de la categoria
     private function requireModelCategories(){
         require_once $this->modelCategories;
     }
 
+    // Método para enviar los datos del formulario para añadir una categoria
     public function addCategories(){
-        if(isset($_POST['name']) && isset($_POST['description'])){
+        if(isset($_POST['name']) && isset($_POST['desc'])){
             session_start(); // Se inicia la sesión
-            $this->requireModelCategories(); // Se llama a los métodos del modelo de tiendas
+            $this->requireModelCategories(); // Se llama a los métodos del modelo de categorias
         
             $name =  $_POST['name'];
-            $description =  $_POST['description'];
-            $date_added =  $_POST['date_added'];
-            $id_store =  $_POST['id_store'];
-            $data = array('name'=>$name,'description'=>$description, 'date_added'=>$date_added, 'id_store'=>$id_store); // Los valores a ingresar en un registro de tienda
+            $desc =  $_POST['desc'];
+            $data = array('name'=>$name,'description'=>$desc, 'id_store'=>$_SESSION['id_store']); // Los valores a ingresar en un registro de categorias
             
             // Se inserta el registro
             $result = insertCategories($data);
@@ -49,6 +61,47 @@ class CategoriesController {
                 return json_encode(array('exito' => false));
             }
         }
+    }
+
+    // Método para enviar los datos del formulario para actualizar una categoria
+    public function updCategories(){
+        if(isset($_POST['name']) && isset($_POST['desc']) && isset($_POST['id'])){
+            session_start(); // Se inicia la sesión
+            $this->requireModelCategories(); // Se llama a los métodos del modelo de categorias
+        
+            $name =  $_POST['name'];
+            $desc =  $_POST['desc'];
+            $id = $_POST['id'];
+            $data = array('name'=>$name, 'description'=>$desc, 'id'=>$id); // Los valores a actualizar en un registro de categorias
+            
+            // Se actualiza el registro
+            $result = updateCategory($data);
+
+            if ($result) {
+                return json_encode(array('exito' => true));
+            } else {
+                return json_encode(array('exito' => false));
+            }
+        }
+    }
+
+    // Método para enviar los datos del formulario para eliminarlo
+    public function delCategories($id){
+        session_start(); // Se inicia la sesión
+        $this->requireModelCategories(); // Se llama a los métodos del modelo de categorias
+
+        $data = array('id'=>$id); // Registro a eliminar
+        
+        // Se elimina el registro
+        $result = deleteCategory($data);
+
+        header("Location: index.php?controller=CategoriesController&action=loadPage");
+
+        // if ($result) {
+        //     return json_encode(array('exito' => true));
+        // } else {
+        //     return json_encode(array('exito' => false));
+        // }
     }
 }
 

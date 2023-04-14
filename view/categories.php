@@ -3,7 +3,7 @@
   session_start();
   include_once "layouts/header.php"; 
   include_once "model/CategoriesModel.php";
-  $categories = getCategories()
+  $categories = getCategories($_SESSION['id_store'])
 ?>
 
     <!-- Layout wrapper -->
@@ -22,7 +22,19 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"> Categorias</h4>
+              <div class="row justify-content-between">
+                <div class="col-sm-1">
+                  <h4 class="fw-bold py-3 mb-4"> Categorias</h4>
+                </div>
+
+                <div class="col-sm-2">
+                  <a href="index.php?controller=CategoriesController&action=addCategoriesPage" class="btn btn-secondary">
+                    <span class="bx bx-edit-alt"></span>
+                    Añadir categoria
+                  </a>
+                </div>
+              </div>
+              
 
               <table id="example" class="display table-responsive text-nowrap" style="width:100%">
                 <thead>
@@ -45,10 +57,10 @@
                             <i class="bx bx-dots-vertical-rounded"></i>
                           </button>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item" href="index.php?controller=CategoriesController&action=updateCategoriesPage&data=<?php echo $data['id']?>">
                               <i class="bx bx-edit-alt me-1"></i> Editar
                             </a>
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item" href="index.php?controller=CategoriesController&action=delCategories&data=<?php echo $data['id']?>">
                               <i class="bx bx-trash me-1"></i> Eliminar
                             </a>
                           </div>

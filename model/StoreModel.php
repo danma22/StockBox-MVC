@@ -68,7 +68,7 @@ function getNameStore($id){
     return $name;
 }
 
-
+// Método para obtener un registro de una tienda en especifico
 function searchStore($id){
     $query = "SELECT name, active FROM Store WHERE id=:id";
     $data = array('id' => $id);
