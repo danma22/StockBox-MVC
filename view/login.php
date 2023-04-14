@@ -17,10 +17,10 @@
               </div>
               <!-- /Logo -->
               <h4 class="mb-2">¡Bienvenido a StockBox! 👋</h4>
-              <p class="mb-4">Inicia sesión y empieza a organizar tu negocio como nunca</p>
-              <p>Integrantes:</p>
-              <p>Rodolfo Cervantes Cabrera</p>
-              <p>Daniel Eduardo Macias Estrada</p>
+              <p class="mb-1">Inicia sesión y empieza a organizar tu negocio como nunca</p>
+              <p class="mb-1">Integrantes:</p>
+              <p class="mb-1">Rodolfo Cervantes Cabrera</p>
+              <p class="mb-4">Daniel Eduardo Macias Estrada</p>
 
               <form id="authForm" class="mb-3" action="" method="POST">
                 <div class="alert alert-danger" role="alert" id="alert" style="display:none"></div>
