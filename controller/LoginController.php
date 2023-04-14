@@ -53,7 +53,7 @@ class LoginController {
                     return json_encode(array('exito' => true, 'url' => 'index.php?controller=StoreController&action=loadPage'));
                 } else {
                     $_SESSION['id_store'] = $result[0]['id_store'];
-                    require_once "model/StoreModel.php"
+                    require_once "model/StoreModel.php";
                     $_SESSION['name_store'] = getNameStore($id_store);
                     return json_encode(array('exito' => true, 'url' => 'index.php?controller=DashboardController&action=loadPage'));
                 }
