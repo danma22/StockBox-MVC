@@ -48,7 +48,7 @@ class LoginController {
                 $_SESSION['type'] = $result[0]['type'];
                 
                 // Para la respuesta a ajax, se indica si la solicitud fue exitosa o no, y en caso de serlo, se envia hacia el dashboard
-                if ($_SESSION['id'] == 1) {
+                if ($_SESSION['type'] == 1) {
                     $_SESSION['id_store'] = -1;
                     return json_encode(array('exito' => true, 'url' => 'index.php?controller=StoreController&action=loadPage'));
                 } else {
