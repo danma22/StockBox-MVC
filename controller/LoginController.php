@@ -51,6 +51,9 @@ class LoginController {
                 if ($_SESSION['id'] == 1) {
                     $_SESSION['id_store'] = -1;
                     return json_encode(array('exito' => true, 'url' => 'index.php?controller=StoreController&action=loadPage'));
+                } else {
+                    $_SESSION['id_store'] = $result[0]['id_store'];
+                    return json_encode(array('exito' => true, 'url' => 'index.php?controller=DashboardController&action=loadPage'));
                 }
                 
             } else {
