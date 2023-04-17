@@ -30,7 +30,7 @@ class DashboardController {
         require_once $this->modelStore;
         $store = searchStore($_SESSION['id_store']);
         if ($store['active'] == 0){
-            header("Location: index.php?controller=StoreController&action=loadPage");
+            header("Location: index.php?controller=LoginController&action=logOut");
         }
     }
 }
