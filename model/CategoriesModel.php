@@ -69,4 +69,15 @@ function searchCategory($id){
     return $store;
 }
 
+// Método para obtener el número total de registros en la tienda
+function getCountCategories($id_store){
+    $query = "SELECT COUNT(*) AS total FROM Categories WHERE id_store=:id_store";
+    $data = array('id_store' => $id_store);
+    
+    $result = Database::execute($query, $data);
+    $total = $result[0]['total'];
+
+    return $total;
+}
+
 ?>

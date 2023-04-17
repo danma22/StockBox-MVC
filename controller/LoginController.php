@@ -41,20 +41,19 @@ class LoginController {
             $result = searchUserLogin($filterCredential); 
             
             // si se trae al menos una consulta, se guarda los datos en una variable SESSION
-            if(count($result) == 1){
-                $_SESSION['id'] = $result[0]['id'];
-                $_SESSION['username'] = $result[0]['username'];
-                $_SESSION['password'] = $result[0]['password'];
-                $_SESSION['type'] = $result[0]['type'];
+            if(count($result) > 1){
+                $_SESSION['id'] = $result['id'];
+                $_SESSION['username'] = $result['username'];
+                $_SESSION['type'] = $result['type'];
                 
                 // Para la respuesta a ajax, se indica si la solicitud fue exitosa o no, y en caso de serlo, se envia hacia el dashboard
                 if ($_SESSION['type'] == 1) {
                     $_SESSION['id_store'] = -1;
                     return json_encode(array('exito' => true, 'url' => 'index.php?controller=StoreController&action=loadPage'));
                 } else {
-                    $_SESSION['id_store'] = $result[0]['id_store'];
+                    $_SESSION['id_store'] = $result['id_store'];
                     require_once "model/StoreModel.php";
-                    $_SESSION['name_store'] = getNameStore($id_store);
+                    $_SESSION['name_store'] = getNameStore($_SESSION['id_store']);
                     return json_encode(array('exito' => true, 'url' => 'index.php?controller=DashboardController&action=loadPage'));
                 }
                 

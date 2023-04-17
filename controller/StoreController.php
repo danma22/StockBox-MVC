@@ -44,6 +44,11 @@ class StoreController {
         if (count($_SESSION) == 0){
             header("Location: index.php");
         }
+
+        // También se valida si el usuario es de tipo superadministrador
+        if ($_SESSION['type'] == 2){
+            header("Location: index.php?controller=LoginController&action=logOut");
+        }
     }
 
     // Método para obtener el código del modelo de tienda

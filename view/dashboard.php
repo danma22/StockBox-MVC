@@ -1,6 +1,13 @@
 <?php
   session_start();
   include_once "layouts/header.php";
+  include_once "model/ProductModel.php";
+  include_once "model/UserModel.php";
+  include_once "model/CategoriesModel.php";
+
+  $total_products = getCountProducts($_SESSION['id_store']);
+  $total_users = getCountUsers($_SESSION['id_store']);
+  $total_categories = getCountCategories($_SESSION['id_store']);
 ?>
 
     <!-- Layout wrapper -->
@@ -29,8 +36,8 @@
                         </div>
                       </div>
                       <span class="fw-semibold d-block mb-1">Total de productos</span>
-                      <h3 class="card-title text-nowrap mb-2 text-success">234</h3>
-                      <a class="btn btn-secondary d-grid w-100" name="submit" href="">Ver más</a>
+                      <h3 class="card-title text-nowrap mb-2 text-success"><?php  echo $total_products ?></h3>
+                      <a class="btn btn-secondary d-grid w-100" name="submit" href="index.php?controller=InventoryController&action=loadPage">Ver más</a>
                     </div>
                   </div>
                 </div>
@@ -44,8 +51,8 @@
                         </div>
                       </div>
                       <span class="fw-semibold d-block mb-1">Total de usuarios</span>
-                      <h3 class="card-title text-nowrap mb-2 text-success">23</h3>
-                      <a class="btn btn-secondary d-grid w-100" name="submit" href="">Ver más</a>
+                      <h3 class="card-title text-nowrap mb-2 text-success"><?php  echo $total_users ?></h3>
+                      <a class="btn btn-secondary d-grid w-100" name="submit" href="index.php?controller=UserController&action=loadPage">Ver más</a>
                     </div>
                   </div>
                 </div>
@@ -59,7 +66,7 @@
                         </div>
                       </div>
                       <span class="fw-semibold d-block mb-1">Total de categorias</span>
-                      <h3 class="card-title text-nowrap mb-2 text-success">6</h3>
+                      <h3 class="card-title text-nowrap mb-2 text-success"><?php  echo $total_categories ?></h3>
                       <a class="btn btn-secondary d-grid w-100" name="submit" href="index.php?controller=CategoriesController&action=loadPage">Ver más</a>
                     </div>
                   </div>

@@ -1,7 +1,15 @@
 
 <?php
   session_start();
-  include_once "layouts/header.php"; 
+  include_once "layouts/header.php";
+  include_once "model/UserModel.php";
+
+  $user_data = array();
+  if (isset($id_user)) {
+    $user_data = searchUser($id_user);
+  } else {
+    $id_user = "";
+  }
 ?>
 
     <!-- Layout wrapper -->
@@ -43,11 +51,16 @@
                     <div class="card-body">
                       <div class="alert alert-danger" role="alert" id="alert" style="display:none"></div>
                       <form id="addUsersForm" method="POST">
+                        <input type="hidden" name="id" id="id" value="<?php echo $id_user ?>">
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="name">Nombre</label>
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
-                              <input type="text" id="name" name="name" class="form-control" placeholder="Ingresa el nombre"/>
+                              <?php if (count($user_data) != 0) { ?>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Ingresa el nombre" value="<?php echo $user_data['name'] ?>"/>
+                              <?php } else { ?>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Ingresa el nombre"/>
+                              <?php } ?>
                             </div>
                           </div>
                         </div>
@@ -56,7 +69,11 @@
                           <label class="col-sm-2 col-form-label" for="lastname_p">Apellido paterno</label>
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
-                              <input type="text" id="lastname_p" name="lastname_p" class="form-control" placeholder="Ingresa el apellido paterno"/>
+                              <?php if (count($user_data) != 0) { ?>
+                                <input type="text" id="lastname_p" name="lastname_p" class="form-control" placeholder="Ingresa el apellido paterno" value="<?php echo $user_data['lastname_p'] ?>"/>
+                              <?php } else { ?>
+                                <input type="text" id="lastname_p" name="lastname_p" class="form-control" placeholder="Ingresa el apellido paterno"/>
+                              <?php } ?>
                             </div>
                           </div>
                         </div>
@@ -65,7 +82,11 @@
                           <label class="col-sm-2 col-form-label" for="lastname_m">Apellido materno</label>
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
-                              <input type="text" id="lastname_m" name="lastname_m" class="form-control" placeholder="Ingresa el apellido materno"/>
+                              <?php if (count($user_data) != 0) { ?>
+                                <input type="text" id="lastname_m" name="lastname_m" class="form-control" placeholder="Ingresa el apellido materno" value="<?php echo $user_data['lastname_m'] ?>"/>
+                              <?php } else { ?>
+                                <input type="text" id="lastname_m" name="lastname_m" class="form-control" placeholder="Ingresa el apellido materno"/>
+                              <?php } ?>
                             </div>
                           </div>
                         </div>
@@ -74,7 +95,11 @@
                           <label class="col-sm-2 col-form-label" for="username">Nombre de usuario</label>
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
-                              <input type="text" id="username" name="username" class="form-control" placeholder="Ingresa el nombre de usuario"/>
+                              <?php if (count($user_data) != 0) { ?>
+                                <input type="text" id="username" name="username" class="form-control" placeholder="Ingresa el nombre de usuario" value="<?php echo $user_data['username'] ?>"/>
+                              <?php } else { ?>
+                                <input type="text" id="username" name="username" class="form-control" placeholder="Ingresa el nombre de usuario"/>
+                              <?php } ?>
                             </div>
                           </div>
                         </div>
@@ -83,7 +108,11 @@
                           <label class="col-sm-2 col-form-label" for="email">Correo</label>
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
-                              <input type="email" id="email" name="email" class="form-control" placeholder="Ingresa el correo electrónico"/>
+                              <?php if (count($user_data) != 0) { ?>
+                                <input type="text" id="email" name="email" class="form-control" placeholder="Ingresa el correo electrónico" value="<?php echo $user_data['email'] ?>"/>
+                              <?php } else { ?>
+                                <input type="text" id="email" name="email" class="form-control" placeholder="Ingresa el correo electrónico"/>
+                              <?php } ?>
                             </div>
                           </div>
                         </div>

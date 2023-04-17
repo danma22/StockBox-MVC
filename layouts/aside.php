@@ -2,7 +2,7 @@
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
+        <a href="javascript:void(0);" class="app-brand-link">
             <span class="app-brand-logo demo">
                 <img src="assets/img/logo.png"/>
             </span>
@@ -59,7 +59,7 @@
             <span class="menu-header-text">Stock</span>
         </li>
         <li class="menu-item" id="itemInventario">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="index.php?controller=InventoryController&action=loadPage" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-package"></i>
                 <div data-i18n="Inventario">Inventario</div>
             </a>
@@ -68,23 +68,6 @@
             <a href="index.php?controller=CategoriesController&action=loadPage" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category-alt"></i>
                 <div data-i18n="Category">Categorias</div>
-            </a>
-        </li>
-
-        <!-- Ventas -->
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Ventas</span>
-        </li>
-        <li class="menu-item" id="itemVenta">
-            <a href="javascript:void(0);" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-coin"></i>
-                <div data-i18n="Inventario">Realizar venta</div>
-            </a>
-        </li>
-        <li class="menu-item" id="itemHistorialVenta">
-            <a href="javascript:void(0);" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-coin-stack"></i>
-                <div data-i18n="Category">Historial de ventas</div>
             </a>
         </li>
 

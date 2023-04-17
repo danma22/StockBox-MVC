@@ -2,8 +2,8 @@
 <?php
   session_start();
   include_once "layouts/header.php"; 
-  include_once "model/StoreModel.php";
-  $stores = getStores()
+  include_once "model/ProductModel.php";
+  $products = getProducts($_SESSION['id_store']);
 ?>
 
     <!-- Layout wrapper -->
@@ -22,53 +22,50 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"> Tiendas</h4>
-
-              <!-- Toast  -->
-              <div class="bs-toast toast toast-placement-ex m-2 fade bg-success top-0 end-0 hide" id="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
-                <div class="toast-header">
-                  <i class="bx bx-bell me-2"></i>
-                  <div class="me-auto fw-semibold" id="toastHeader"></div>
-                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <div class="row justify-content-between">
+                <div class="col-sm-1">
+                  <h4 class="fw-bold py-3 mb-4"> Inventario</h4>
                 </div>
-                <div class="toast-body" id="toastBody"> </div>
+
+                <div class="col-sm-2">
+                  <a href="index.php?controller=InventoryController&action=addInventoryPage" class="btn btn-secondary">
+                    <span class="bx bx-edit-alt"></span>
+                    Añadir producto
+                  </a>
+                </div>
               </div>
-              <!-- / Toast  -->
 
               <table id="example" class="display table-responsive text-nowrap" style="width:100%">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>Código</th>
                     <th>Nombre</th>
-                    <th>Activa</th>
+                    <th>Fecha agregado</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($stores as $key => $data) { ?>
+                  <?php foreach ($products as $key => $data) { ?>
                     <tr>
-                      <td><?php echo $data['id'] ?></td>
+                      <td><?php echo $data['code'] ?></td>
                       <td><?php echo $data['name'] ?></td>
-                      <td>
-                        <?php if ($data['active'] == 1) { ?>
-                          <span class="badge rounded-pill bg-label-success">Activo</span>
-                        <?php } else { ?>
-                          <span class="badge rounded-pill bg-label-danger">Inactivo</span>
-                        <?php } ?>
-                      </td>
+                      <td><?php echo $data['date_added'] ?></td>
+                      <td><?php echo $data['price'] ?></td>
+                      <td><?php echo $data['name_c'] ?></td>
+                      <td><?php echo $data['stock'] ?></td>
                       <td>
                         <div class="dropdown">
                           <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                             <i class="bx bx-dots-vertical-rounded"></i>
                           </button>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="index.php?controller=StoreController&action=loadStoreDashboard&data=<?php echo $data['id']?>"">
-                              <i class="bx bx-door-open me-1"></i> Ingresa
-                            </a>
-                            <a class="dropdown-item" href="index.php?controller=StoreController&action=updateStorePage&data=<?php echo $data['id']?>">
+                            <a class="dropdown-item" href="index.php?controller=InventoryController&action=updateInventoryPage&data=<?php echo $data['id']?>">
                               <i class="bx bx-edit-alt me-1"></i> Editar
                             </a>
-                            <a class="dropdown-item actions" data-bs-toggle="modal" data-bs-target="#modalDelete" data-url="index.php?controller=StoreController&action=delStore&data=<?php echo $data['id']?>">
+                            <a class="dropdown-item actions" data-bs-toggle="modal" data-bs-target="#modalDelete" data-url="index.php?controller=InventoryController&action=delProducts&data=<?php echo $data['id']?>">
                               <i class="bx bx-trash me-1"></i> Eliminar
                             </a>
                           </div>
@@ -79,16 +76,6 @@
                   <?php } ?>
 
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Activa</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </tr>
-                </tfoot>
               </table>
             </div>
             <!-- / Content -->
@@ -142,9 +129,11 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    
 
     <!-- Page JS -->
     <script type="text/javascript" language="javascript" src="assets/datatables/js/jquery.dataTables.js"></script>
+    <script src="assets/js/user.js"></script>
 
     <script>
       $(document).ready(function () {

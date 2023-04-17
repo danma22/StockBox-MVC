@@ -62,10 +62,10 @@
                             <i class="bx bx-dots-vertical-rounded"></i>
                           </button>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item" href="index.php?controller=UserController&action=updateUserPage&data=<?php echo $data['id']?>">
                               <i class="bx bx-edit-alt me-1"></i> Editar
                             </a>
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item actions" data-bs-toggle="modal" data-bs-target="#modalDelete" data-url="index.php?controller=UserController&action=delUsers&data=<?php echo $data['id']?>">
                               <i class="bx bx-trash me-1"></i> Eliminar
                             </a>
                           </div>
@@ -94,6 +94,26 @@
     </div>
     <!-- / Layout wrapper -->
 
+    <!-- Modal para eliminar -->
+    <div class="modal fade" id="modalDelete" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCenterTitle">¿Desea eliminar el registro?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Una vez elimine el este registro, no hay forma de revertirlo
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="closeModal" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" id="delete" class="btn btn-danger">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / Modal para eliminar -->
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="assets/vendor/libs/jquery/jquery.js"></script>
@@ -113,10 +133,20 @@
 
     <!-- Page JS -->
     <script type="text/javascript" language="javascript" src="assets/datatables/js/jquery.dataTables.js"></script>
+    <script src="assets/js/user.js"></script>
 
     <script>
       $(document).ready(function () {
           $('#example').DataTable();
+
+          $(".actions").click(function(event) {
+              var boton = $(event.target);
+              $("#delete").data('url', boton.data("url"));
+          });
+
+          $("#delete").click(function(event) {
+              window.location.href = $(this).data("url");
+          });
       });
     </script>
 

@@ -11,39 +11,69 @@ $(document).ready(function() {
         var username = $("#username").val();
         var email = $("#email").val();
         var password = $("#password").val();
-    
+        var id = $("#id").val();
+
         // Validación de campos vacíos
         if (username == '' || password == '' || name =='' || lastname_p =='' || lastname_m =='' || email =='') {
             $("#alert").html("Los campos están vacios -- Revisalo!");
             $("#alert").css("display", "block");
             return false;
         }
-    
-        // Envía la solicitud AJAX
-        $.ajax({
-            type: "POST",
-            url: "index.php?controller=UserController&action=addUsers",
-            data: $("#addUsersForm").serialize(),
-            success: function(response) {
-                response = JSON.parse(response);
-                if (response.exito) {
-                    $("#toastHeader").html("¡Usuario agregado!");
-                    $("#toastBody").html("El usuario indicado ha sido registrada con éxito");
-                    $("#toast").removeClass("bg-danger");
-                    $("#toast").addClass("bg-success");
-                    
-                    const toast = new bootstrap.Toast(document.getElementById('toast'))
-                    toast.show()
-                }else{
-                    $("#toastHeader").html("¡Sin éxito!");
-                    $("#toastBody").html("El usuario indicado no ha sido registrado, pruebe más tarde");
-                    $("#toast").removeClass("bg-success");
-                    $("#toast").addClass("bg-danger");
-                    
-                    const toast = new bootstrap.Toast(document.getElementById('toast'))
-                    toast.show()
+
+        if (id == "") {
+            // Envía la solicitud AJAX para ingresar
+            $.ajax({
+                type: "POST",
+                url: "index.php?controller=UserController&action=addUsers",
+                data: $("#addUsersForm").serialize(),
+                success: function(response) {
+                    response = JSON.parse(response);
+                    if (response.exito) {
+                        $("#toastHeader").html("¡Usuario agregado!");
+                        $("#toastBody").html("El usuario indicado ha sido registrada con éxito");
+                        $("#toast").removeClass("bg-danger");
+                        $("#toast").addClass("bg-success");
+                        
+                        const toast = new bootstrap.Toast(document.getElementById('toast'))
+                        toast.show()
+                    }else{
+                        $("#toastHeader").html("¡Sin éxito!");
+                        $("#toastBody").html("El usuario indicado no ha sido registrado, pruebe más tarde");
+                        $("#toast").removeClass("bg-success");
+                        $("#toast").addClass("bg-danger");
+                        
+                        const toast = new bootstrap.Toast(document.getElementById('toast'));
+                        toast.show();
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            // Envía la solicitud AJAX para actualizar
+            $.ajax({
+                type: "POST",
+                url: "index.php?controller=UserController&action=updUsers",
+                data: $("#addUsersForm").serialize(),
+                success: function(response) {
+                    response = JSON.parse(response);
+                    if (response.exito) {
+                        $("#toastHeader").html("¡Usuario actualizado!");
+                        $("#toastBody").html("El usuario indicada ha sido actualizado con éxito");
+                        $("#toast").removeClass("bg-danger");
+                        $("#toast").addClass("bg-success");
+                        
+                        const toast = new bootstrap.Toast(document.getElementById('toast'));
+                        toast.show();
+                    }else{
+                        $("#toastHeader").html("¡Sin éxito!");
+                        $("#toastBody").html("El usuario indicado no ha sido actualizada, pruebe más tarde");
+                        $("#toast").removeClass("bg-success");
+                        $("#toast").addClass("bg-danger");
+                        
+                        const toast = new bootstrap.Toast(document.getElementById('toast'));
+                        toast.show();
+                    }
+                }
+            });
+        }
     });
 });
