@@ -18,15 +18,13 @@ class StoreController {
     public function loadStoreDashboard($id_store){
         session_start();
         $this->requireModelStore();
-        $_SESSION['id_store'] = (int)$id_store;
-        $_SESSION['name_store'] = getNameStore($id_store);
         
-        //$store = searchStore($_SESSION['id_store']);
-        //if ($store['active'] == 1){
-        //    header("Location: index.php?controller=DashboardController&action=loadPage");
-        //}
-        
-        header("Location: index.php?controller=DashboardController&action=loadPage");
+        $store = searchStore($id_store);
+        if ($store['active'] == 1){
+            $_SESSION['id_store'] = (int)$id_store;
+            $_SESSION['name_store'] = getNameStore($id_store);
+            header("Location: index.php?controller=DashboardController&action=loadPage");
+        }
     }
 
     // Método para mostrar la vista para actualizar una tienda
