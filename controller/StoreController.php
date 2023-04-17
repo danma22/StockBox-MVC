@@ -24,6 +24,8 @@ class StoreController {
             $_SESSION['id_store'] = (int)$id_store;
             $_SESSION['name_store'] = getNameStore($id_store);
             header("Location: index.php?controller=DashboardController&action=loadPage");
+        } else {
+            header("Location: index.php?controller=StoreController&action=loadPage");
         }
     }
 
