@@ -76,8 +76,10 @@ class StoreController {
             $result = insertStore($data);
 
             if ($result) {
+                $_SESSION['toast'] = array('exito' => true, 'header' => "¡Tienda agregada!", 'body' => 'La tienda indicada ha sido registrada con éxito');
                 return json_encode(array('exito' => true));
             } else {
+                $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'La tienda indicada no ha sido registrada, pruebe más tarde');
                 return json_encode(array('exito' => false));
             }
         }
