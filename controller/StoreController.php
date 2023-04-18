@@ -25,6 +25,7 @@ class StoreController {
             $_SESSION['name_store'] = getNameStore($id_store);
             header("Location: index.php?controller=DashboardController&action=loadPage");
         } else {
+            $_SESSION['toast'] = array('exito' => false, 'header' => "¡No se puede ingresar!", 'body' => 'La tienda está inactiva, no es posible ingresar');
             header("Location: index.php?controller=StoreController&action=loadPage");
         }
     }
