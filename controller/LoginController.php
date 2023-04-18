@@ -45,6 +45,7 @@ class LoginController {
                 $_SESSION['id'] = $result['id'];
                 $_SESSION['username'] = $result['username'];
                 $_SESSION['type'] = $result['type'];
+                $_SESSION['toast'] = array();
                 
                 // Para la respuesta a ajax, se indica si la solicitud fue exitosa o no, y en caso de serlo, se envia hacia el dashboard
                 if ($_SESSION['type'] == 1) {
