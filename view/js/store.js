@@ -31,24 +31,7 @@ $(document).ready(function() {
                 url: "index.php?controller=StoreController&action=updStore",
                 data: $("#addStoreForm").serialize(),
                 success: function(response) {
-                    response = JSON.parse(response);
-                    if (response.exito) {
-                        $("#toastHeader").html("¡Tienda actualizada!");
-                        $("#toastBody").html("La tienda indicada ha sido actualizada con éxito");
-                        $("#toast").removeClass("bg-danger");
-                        $("#toast").addClass("bg-success");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'))
-                        toast.show()
-                    }else{
-                        $("#toastHeader").html("¡Sin éxito!");
-                        $("#toastBody").html("La tienda indicada no ha sido actualizada, pruebe más tarde");
-                        $("#toast").removeClass("bg-success");
-                        $("#toast").addClass("bg-danger");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'))
-                        toast.show()
-                    }
+                    window.location.href = "index.php?controller=StoreController&action=loadPage"
                 }
             });
         }
