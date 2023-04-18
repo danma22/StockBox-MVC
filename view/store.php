@@ -159,8 +159,8 @@
               window.location.href = $(this).data("url");
           });
                                                        
-          <?php if (count($_SESSION['toast']) > 0) ?>
-              <?php if ($_SESSION['toast']['exito'] == true) ?>
+          <?php if (count($_SESSION['toast']) > 0) { ?>
+              <?php if ($_SESSION['toast']['exito'] == true) { ?>
                   $("#toastHeader").html("<?php echo $_SESSION['toast']['header'] ?>");
                   $("#toastBody").html("<?php echo $_SESSION['toast']['body'] ?>");
                   $("#toast").removeClass("bg-danger");
@@ -173,8 +173,9 @@
               <?php } ?>
               const toast = new bootstrap.Toast(document.getElementById('toast'));
               toast.show();
-              <?php } ?>
-          <?php $_SESSION['toast'] = array(); ?>
+              <?php $_SESSION['toast'] = array(); ?>
+          <?php } ?>
+          
       });
     </script>
 
