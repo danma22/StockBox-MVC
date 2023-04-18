@@ -22,24 +22,7 @@ $(document).ready(function() {
                 url: "index.php?controller=StoreController&action=addStore",
                 data: $("#addStoreForm").serialize(),
                 success: function(response) {
-                    response = JSON.parse(response);
-                    if (response.exito) {
-                        $("#toastHeader").html("¡Tienda agregada!");
-                        $("#toastBody").html("La tienda indicada ha sido registrada con éxito");
-                        $("#toast").removeClass("bg-danger");
-                        $("#toast").addClass("bg-success");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'))
-                        toast.show()
-                    }else{
-                        $("#toastHeader").html("¡Sin éxito!");
-                        $("#toastBody").html("La tienda indicada no ha sido registrada, pruebe más tarde");
-                        $("#toast").removeClass("bg-success");
-                        $("#toast").addClass("bg-danger");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'))
-                        toast.show()
-                    }
+                    window.location.href = "index.php?controller=StoreController&action=loadPage"
                 }
             });
         } else {
