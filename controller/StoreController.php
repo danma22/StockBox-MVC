@@ -100,8 +100,10 @@ class StoreController {
             $result = updateStore($data);
 
             if ($result) {
+                $_SESSION['toast'] = array('exito' => true, 'header' => "¡Tienda actualizada!", 'body' => 'La tienda indicada ha sido actualizada con éxito');
                 return json_encode(array('exito' => true));
             } else {
+                $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'La tienda indicada no ha sido actualizada, pruebe más tarde');
                 return json_encode(array('exito' => false));
             }
         }
@@ -116,14 +118,14 @@ class StoreController {
         
         // Se elimina el registro
         $result = deleteStore($data);
-
+        
+        if ($result) {
+            $_SESSION['toast'] = array('exito' => true, 'header' => "¡Tienda eliminada!", 'body' => 'La tienda indicada ha sido eliminada con éxito');
+        } else {
+            $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'La tienda indicada no ha sido eliminada, pruebe más tarde');
+        }
+        
         header("Location: index.php?controller=StoreController&action=loadPage");
-
-        // if ($result) {
-        //     return json_encode(array('exito' => true));
-        // } else {
-        //     return json_encode(array('exito' => false));
-        // }
     }
 }
 
