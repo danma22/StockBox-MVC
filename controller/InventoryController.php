@@ -141,7 +141,7 @@ class InventoryController {
                 $note = "El usuario ".$_POST['user']." agregó ".$units." unidades del producto al inventario";
                 $stock = $_POST['stock'] + $units;
             } else {
-                $note = "El usuario ".$_POST['user']." venció ".$units." unidades del producto";
+                $note = "El usuario ".$_POST['user']." vendió ".$units." unidades del producto";
                 $stock = $_POST['stock'] - $units;
             }
             
