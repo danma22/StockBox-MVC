@@ -148,6 +148,11 @@ class InventoryController {
             $id = $_POST['id'];
             $data = array('note'=>$note,'reference'=>$ref,'quantity'=>$units, 'id_user'=>$_SESSION['id'], 'id_store'=>$_SESSION['id_store'], 'id_product'=>$id); // Los valores a ingresar en un registro de producto
             
+            if ($stock < 0) {
+                $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'No se puede eliminar más productos de los que hay');
+                return json_encode(array('exito' => false));
+            }
+            
             // Se actualiza el registro
             $result = insertStockLog($data);
 
