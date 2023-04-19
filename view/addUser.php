@@ -109,9 +109,9 @@
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
                               <?php if (count($user_data) != 0) { ?>
-                                <input type="text" id="email" name="email" class="form-control" placeholder="Ingresa el correo electrónico" value="<?php echo $user_data['email'] ?>"/>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Ingresa el correo electrónico" value="<?php echo $user_data['email'] ?>"/>
                               <?php } else { ?>
-                                <input type="text" id="email" name="email" class="form-control" placeholder="Ingresa el correo electrónico"/>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Ingresa el correo electrónico"/>
                               <?php } ?>
                             </div>
                           </div>
