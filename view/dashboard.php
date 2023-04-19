@@ -71,8 +71,8 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="col-lg-3 col-md-6 col-12 mb-4">
+                
+                <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
                   <div class="card">
                     <div class="card-body">
                       <div class="card-title d-flex align-items-start justify-content-between">
@@ -84,7 +84,7 @@
                       <h3 class="card-title text-nowrap mb-2 text-success">23</h3>
                     </div>
                   </div>
-                </div>
+                </div>  -->
               </div>
             </div>
             <!-- / Content -->
