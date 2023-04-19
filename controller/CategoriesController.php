@@ -56,8 +56,10 @@ class CategoriesController {
             $result = insertCategories($data);
 
             if ($result) {
+                $_SESSION['toast'] = array('exito' => true, 'header' => "¡Categoria agregada!", 'body' => 'La categoria indicada ha sido registrada con éxito');
                 return json_encode(array('exito' => true));
             } else {
+                $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'La categoria indicada no ha sido registrada, pruebe más tarde');
                 return json_encode(array('exito' => false));
             }
         }
@@ -78,8 +80,10 @@ class CategoriesController {
             $result = updateCategory($data);
 
             if ($result) {
+                $_SESSION['toast'] = array('exito' => true, 'header' => "¡Categoria actualizada!", 'body' => 'La categoria indicada ha sido actualizada con éxito');
                 return json_encode(array('exito' => true));
             } else {
+                $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'La categoria indicada no ha sido actualizada, pruebe más tarde');
                 return json_encode(array('exito' => false));
             }
         }
@@ -95,13 +99,13 @@ class CategoriesController {
         // Se elimina el registro
         $result = deleteCategory($data);
 
-        header("Location: index.php?controller=CategoriesController&action=loadPage");
+        if ($result) {
+            $_SESSION['toast'] = array('exito' => true, 'header' => "¡Categoria eliminada!", 'body' => 'La categoria indicada ha sido eliminada con éxito');
+        } else {
+            $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'La categoria indicada no ha sido eliminada, pruebe más tarde');
+        }
 
-        // if ($result) {
-        //     return json_encode(array('exito' => true));
-        // } else {
-        //     return json_encode(array('exito' => false));
-        // }
+        header("Location: index.php?controller=CategoriesController&action=loadPage");
     }
 }
 

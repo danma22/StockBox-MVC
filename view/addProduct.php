@@ -90,9 +90,9 @@
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
                               <?php if (count($product_data) != 0) { ?>
-                                <input type="number" id="price" name="price" class="form-control" placeholder="Ingresa el precio del producto" value="<?php echo $product_data['price'] ?>"/>
+                                <input type="number" id="price" name="price" step=".01" class="form-control" placeholder="Ingresa el precio del producto" value="<?php echo $product_data['price'] ?>"/>
                               <?php } else { ?>
-                                <input type="number" id="price" name="price" class="form-control" placeholder="Ingresa el precio del producto"/>
+                                <input type="number" id="price" name="price" step=".01" class="form-control" placeholder="Ingresa el precio del producto"/>
                               <?php } ?>
                               
                             </div>
@@ -104,7 +104,7 @@
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
                               <?php if (count($product_data) != 0) { ?>
-                                <input type="number" id="stock" name="stock" class="form-control" placeholder="Ingresa el stock del producto" value="<?php echo $product_data['stock'] ?>"/>
+                                <input type="number" id="stock" name="stock" class="form-control" placeholder="Ingresa el stock del producto" value="<?php echo $product_data['stock'] ?>" readonly/>
                               <?php } else { ?>
                                 <input type="number" id="stock" name="stock" class="form-control" placeholder="Ingresa el stock del producto"/>
                               <?php } ?>
@@ -137,8 +137,8 @@
                         </div>
 
                         <div class="row justify-content-end">
-                          <div class="col-sm-1">
-                            <input type="submit" class="btn btn-primary" value="Enviar" name="submit">
+                          <div class="col-sm-2">
+                            <input type="submit" class="btn btn-primary w-100" value="Enviar" name="submit">
                           </div>
                         </div>
                       </form>

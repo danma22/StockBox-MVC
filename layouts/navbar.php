@@ -38,7 +38,7 @@
 
             <!-- Log out -->
             <li class="nav-item lh-2 me-3">
-                <a class="dropdown-item" href="index.php?controller=LoginController&action=logOut">
+                <a class="dropdown-item" href="index.php?controller=LoginController&action=logOut&data=1">
                     <i class="bx bx-power-off me-2"></i>
                     <span class="align-middle">Cerrar sesión</span>
                 </a>

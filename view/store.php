@@ -158,7 +158,8 @@
           $("#delete").click(function(event) {
               window.location.href = $(this).data("url");
           });
-                                                       
+          
+          // Si existe le toast, entonces se muestra
           <?php if (count($_SESSION['toast']) > 0) { ?>
               <?php if ($_SESSION['toast']['exito'] == true) { ?>
                   $("#toastHeader").html("<?php echo $_SESSION['toast']['header'] ?>");

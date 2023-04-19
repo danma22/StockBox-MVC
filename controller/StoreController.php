@@ -1,6 +1,6 @@
 <?php
 
-// Clase LoginController: Se encarga de la comunicación entre el modelo del usuario y las vistas y rutas relacionadas con el inicio de sesión
+// Clase StoreController: Se encarga de la comunicación entre el modelo de tienda y las vistas y rutas relacionadas con las tiendas
 class StoreController {
     // Vista de la tabla de tiendas
     private $viewStores = "view/store.php";
@@ -19,15 +19,9 @@ class StoreController {
         session_start();
         $this->requireModelStore();
         
-        $store = searchStore($id_store);
-        if ($store['active'] == 1){
-            $_SESSION['id_store'] = (int)$id_store;
-            $_SESSION['name_store'] = getNameStore($id_store);
-            header("Location: index.php?controller=DashboardController&action=loadPage");
-        } else {
-            $_SESSION['toast'] = array('exito' => false, 'header' => "¡No se puede ingresar!", 'body' => 'La tienda está inactiva, no es posible ingresar');
-            header("Location: index.php?controller=StoreController&action=loadPage");
-        }
+        $_SESSION['id_store'] = (int)$id_store;
+        $_SESSION['name_store'] = getNameStore($id_store);
+        header("Location: index.php?controller=DashboardController&action=loadPage");
     }
 
     // Método para mostrar la vista para actualizar una tienda
@@ -54,7 +48,7 @@ class StoreController {
 
         // También se valida si el usuario es de tipo superadministrador
         if ($_SESSION['type'] == 2){
-            header("Location: index.php?controller=LoginController&action=logOut");
+            header("Location: index.php?controller=LoginController&action=logOut&data=1");
         }
     }
 

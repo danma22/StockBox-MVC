@@ -1,6 +1,6 @@
 <?php
 
-// Clase UserController: Se encarga de la comunicación entre el modelo del usuario y las vistas y rutas relacionadas con el inicio de sesión
+// Clase UserController: Se encarga de la comunicación entre el modelo del usuario y las vistas y rutas relacionadas con el usuario
 class UserController {
     // Vista de la tabla de usuarios
     private $viewUsers = "view/users.php";
@@ -60,8 +60,10 @@ class UserController {
             $result = insertUser($data);
 
             if ($result) {
+                $_SESSION['toast'] = array('exito' => true, 'header' => "¡Usuario agregado!", 'body' => 'El usuario indicado ha sido registrada con éxito');
                 return json_encode(array('exito' => true));
             } else {
+                $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'El usuario indicado no ha sido registrado, pruebe más tarde');
                 return json_encode(array('exito' => false));
             }
         }
@@ -86,8 +88,10 @@ class UserController {
             $result = updateUser($data);
 
             if ($result) {
+                $_SESSION['toast'] = array('exito' => true, 'header' => "¡Usuario actualizado!", 'body' => 'El usuario indicado ha sido actualizado con éxito');
                 return json_encode(array('exito' => true));
             } else {
+                $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'El usuario indicado no ha sido actualizado, pruebe más tarde');
                 return json_encode(array('exito' => false));
             }
         }
@@ -103,13 +107,13 @@ class UserController {
         // Se elimina el registro
         $result = deleteUser($data);
 
-        header("Location: index.php?controller=UserController&action=loadPage");
+        if ($result) {
+            $_SESSION['toast'] = array('exito' => true, 'header' => "Usuario eliminado!", 'body' => 'El usuario indicado ha sido eliminado con éxito');
+        } else {
+            $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'El usuario indicado no ha sido eliminado, pruebe más tarde');
+        }
 
-        // if ($result) {
-        //     return json_encode(array('exito' => true));
-        // } else {
-        //     return json_encode(array('exito' => false));
-        // }
+        header("Location: index.php?controller=UserController&action=loadPage");
     }
 }
 

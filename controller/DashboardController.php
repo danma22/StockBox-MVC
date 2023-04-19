@@ -24,13 +24,13 @@ class DashboardController {
         }
     }
 
-    // Método para validar si ya se inicio sesión
+    // Método para validar si la tienda está activa
     private function validateActiveStore(){
         session_start();
         require_once $this->modelStore;
         $store = searchStore($_SESSION['id_store']);
-        if ($store['active'] == 0){
-            header("Location: index.php?controller=LoginController&action=logOut");
+        if ($store['active'] == 0 AND $_SESSION['type'] != 1){
+            header("Location: index.php?controller=LoginController&action=logOut&data=2");
         }
     }
 }

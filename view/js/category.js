@@ -23,24 +23,7 @@ $(document).ready(function() {
                 url: "index.php?controller=CategoriesController&action=addCategories",
                 data: $("#addCategoryForm").serialize(),
                 success: function(response) {
-                    response = JSON.parse(response);
-                    if (response.exito) {
-                        $("#toastHeader").html("¡Categoria agregada!");
-                        $("#toastBody").html("La categoria indicada ha sido registrada con éxito");
-                        $("#toast").removeClass("bg-danger");
-                        $("#toast").addClass("bg-success");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'))
-                        toast.show()
-                    }else{
-                        $("#toastHeader").html("¡Sin éxito!");
-                        $("#toastBody").html("La categoria indicada no ha sido registrada, pruebe más tarde");
-                        $("#toast").removeClass("bg-success");
-                        $("#toast").addClass("bg-danger");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'))
-                        toast.show()
-                    }
+                    window.location.href = "index.php?controller=CategoriesController&action=loadPage";
                 }
             });
         } else {
@@ -49,24 +32,7 @@ $(document).ready(function() {
                 url: "index.php?controller=CategoriesController&action=updCategories",
                 data: $("#addCategoryForm").serialize(),
                 success: function(response) {
-                    response = JSON.parse(response);
-                    if (response.exito) {
-                        $("#toastHeader").html("¡Categoria actualizada!");
-                        $("#toastBody").html("La categoria indicada ha sido actualizada con éxito");
-                        $("#toast").removeClass("bg-danger");
-                        $("#toast").addClass("bg-success");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'))
-                        toast.show()
-                    }else{
-                        $("#toastHeader").html("¡Sin éxito!");
-                        $("#toastBody").html("La categoria indicada no ha sido actualizada, pruebe más tarde");
-                        $("#toast").removeClass("bg-success");
-                        $("#toast").addClass("bg-danger");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'))
-                        toast.show()
-                    }
+                    window.location.href = "index.php?controller=CategoriesController&action=loadPage";
                 }
             });
         }

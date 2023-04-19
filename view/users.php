@@ -35,6 +35,17 @@
                 </div>
               </div>
 
+              <!-- Toast  -->
+              <div class="bs-toast toast toast-placement-ex m-2 fade bg-success top-0 end-0 hide" id="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                <div class="toast-header">
+                  <i class="bx bx-bell me-2"></i>
+                  <div class="me-auto fw-semibold" id="toastHeader"></div>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastBody"> </div>
+              </div>
+              <!-- / Toast  -->
+
               <table id="example" class="display table-responsive text-nowrap" style="width:100%">
                 <thead>
                   <tr>
@@ -147,6 +158,24 @@
           $("#delete").click(function(event) {
               window.location.href = $(this).data("url");
           });
+          
+          // Si existe le toast, entonces se muestra
+          <?php if (count($_SESSION['toast']) > 0) { ?>
+              <?php if ($_SESSION['toast']['exito'] == true) { ?>
+                  $("#toastHeader").html("<?php echo $_SESSION['toast']['header'] ?>");
+                  $("#toastBody").html("<?php echo $_SESSION['toast']['body'] ?>");
+                  $("#toast").removeClass("bg-danger");
+                  $("#toast").addClass("bg-success");
+              <?php } else {?>
+                  $("#toastHeader").html("<?php echo $_SESSION['toast']['header'] ?>");
+                  $("#toastBody").html("<?php echo $_SESSION['toast']['body'] ?>");
+                  $("#toast").removeClass("bg-success");
+                  $("#toast").addClass("bg-danger");
+              <?php } ?>
+              const toast = new bootstrap.Toast(document.getElementById('toast'));
+              toast.show();
+              <?php $_SESSION['toast'] = array(); ?>
+          <?php } ?>
       });
     </script>
 

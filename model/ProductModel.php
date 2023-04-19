@@ -63,7 +63,10 @@ function getProducts($id_store){
 
 // Método para obtener un registro de un producto en especifico
 function searchProduct($id){
-    $query = "SELECT code, name, price, stock, id_categories FROM Products WHERE id=:id";
+    $query = "SELECT p.code AS code, p.name AS name, p.price AS price, p.stock AS stock, p.id_categories AS id_categories, c.name AS name_category
+                FROM Products AS p
+                JOIN Categories AS c ON p.id_categories = c.id
+                WHERE p.id=:id";
     $data = array('id' => $id);
     
     $result = Database::execute($query, $data);

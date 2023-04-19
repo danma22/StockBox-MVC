@@ -27,24 +27,7 @@ $(document).ready(function() {
                 url: "index.php?controller=UserController&action=addUsers",
                 data: $("#addUsersForm").serialize(),
                 success: function(response) {
-                    response = JSON.parse(response);
-                    if (response.exito) {
-                        $("#toastHeader").html("¡Usuario agregado!");
-                        $("#toastBody").html("El usuario indicado ha sido registrada con éxito");
-                        $("#toast").removeClass("bg-danger");
-                        $("#toast").addClass("bg-success");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'))
-                        toast.show()
-                    }else{
-                        $("#toastHeader").html("¡Sin éxito!");
-                        $("#toastBody").html("El usuario indicado no ha sido registrado, pruebe más tarde");
-                        $("#toast").removeClass("bg-success");
-                        $("#toast").addClass("bg-danger");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'));
-                        toast.show();
-                    }
+                    window.location.href = "index.php?controller=UserController&action=loadPage";
                 }
             });
         } else {
@@ -54,24 +37,7 @@ $(document).ready(function() {
                 url: "index.php?controller=UserController&action=updUsers",
                 data: $("#addUsersForm").serialize(),
                 success: function(response) {
-                    response = JSON.parse(response);
-                    if (response.exito) {
-                        $("#toastHeader").html("¡Usuario actualizado!");
-                        $("#toastBody").html("El usuario indicada ha sido actualizado con éxito");
-                        $("#toast").removeClass("bg-danger");
-                        $("#toast").addClass("bg-success");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'));
-                        toast.show();
-                    }else{
-                        $("#toastHeader").html("¡Sin éxito!");
-                        $("#toastBody").html("El usuario indicado no ha sido actualizada, pruebe más tarde");
-                        $("#toast").removeClass("bg-success");
-                        $("#toast").addClass("bg-danger");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'));
-                        toast.show();
-                    }
+                    window.location.href = "index.php?controller=UserController&action=loadPage";
                 }
             });
         }

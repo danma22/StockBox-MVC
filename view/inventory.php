@@ -22,7 +22,7 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row justify-content-between">
+              <div class="row justify-content-between">
                 <div class="col-sm-1">
                   <h4 class="fw-bold py-3 mb-4"> Inventario</h4>
                 </div>
@@ -34,6 +34,17 @@
                   </a>
                 </div>
               </div>
+
+              <!-- Toast  -->
+              <div class="bs-toast toast toast-placement-ex m-2 fade bg-success top-0 end-0 hide" id="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                <div class="toast-header">
+                  <i class="bx bx-bell me-2"></i>
+                  <div class="me-auto fw-semibold" id="toastHeader"></div>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastBody"> </div>
+              </div>
+              <!-- / Toast  -->
 
               <table id="example" class="display table-responsive text-nowrap" style="width:100%">
                 <thead>
@@ -62,6 +73,9 @@
                             <i class="bx bx-dots-vertical-rounded"></i>
                           </button>
                           <div class="dropdown-menu">
+                            <a class="dropdown-item" href="index.php?controller=InventoryController&action=detailProductPage&data=<?php echo $data['id']?>">
+                              <i class="bx bx-detail me-1"></i> Detalles
+                            </a>
                             <a class="dropdown-item" href="index.php?controller=InventoryController&action=updateInventoryPage&data=<?php echo $data['id']?>">
                               <i class="bx bx-edit-alt me-1"></i> Editar
                             </a>
@@ -147,6 +161,24 @@
           $("#delete").click(function(event) {
               window.location.href = $(this).data("url");
           });
+
+          // Si existe le toast, entonces se muestra
+          <?php if (count($_SESSION['toast']) > 0) { ?>
+              <?php if ($_SESSION['toast']['exito'] == true) { ?>
+                  $("#toastHeader").html("<?php echo $_SESSION['toast']['header'] ?>");
+                  $("#toastBody").html("<?php echo $_SESSION['toast']['body'] ?>");
+                  $("#toast").removeClass("bg-danger");
+                  $("#toast").addClass("bg-success");
+              <?php } else {?>
+                  $("#toastHeader").html("<?php echo $_SESSION['toast']['header'] ?>");
+                  $("#toastBody").html("<?php echo $_SESSION['toast']['body'] ?>");
+                  $("#toast").removeClass("bg-success");
+                  $("#toast").addClass("bg-danger");
+              <?php } ?>
+              const toast = new bootstrap.Toast(document.getElementById('toast'));
+              toast.show();
+              <?php $_SESSION['toast'] = array(); ?>
+          <?php } ?>
       });
     </script>
 

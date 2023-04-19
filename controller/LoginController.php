@@ -15,10 +15,13 @@ class LoginController {
     }
     
     // Método que destruye todas las variables de la sesión y la sesión actual
-    public function logOut($popup){
+    public function logOut($type){
         session_start();
         $_SESSION = array();
         session_destroy();
+        if ($type == 2) {
+            $_SESSION['toast'] = array('exito' => false, 'header' => "¡Tienda inactiva!", 'body' => 'La tienda actualmente está inactiva, pruebe más tarde');
+        }
         $this->loadPage();
     }
     

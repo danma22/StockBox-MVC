@@ -110,8 +110,8 @@
                         </div>
 
                         <div class="row justify-content-end">
-                          <div class="col-sm-1">
-                            <input type="submit" class="btn btn-primary" value="Enviar" name="submit">
+                          <div class="col-sm-2">
+                            <input type="submit" class="btn btn-primary w-100" value="Enviar" name="submit">
                           </div>
                         </div>
                       </form>

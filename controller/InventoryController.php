@@ -6,6 +6,8 @@ class InventoryController {
     private $viewInventory = "view/inventory.php";
     // Modelo de productos
     private $modelProducts = "model/ProductModel.php";
+    // Modelo de Stock
+    private $modelStock = "model/StockModel.php";
 
     // Método para cargar la página
     public function loadPage(){
@@ -29,6 +31,14 @@ class InventoryController {
         include ("view/addProduct.php");
     }
 
+    // Método para mostrar la vista de los detalles de un producto
+    public function detailProductPage($id_product){
+        $id_product = (int)$id_product;
+        $this->validateSession();
+        $page = array("Detalles de Producto", "");
+        include ("view/detailsProduct.php");
+    }
+
     // Método para validar si ya se inicio sesión
     private function validateSession(){
         session_start();
@@ -40,6 +50,11 @@ class InventoryController {
     // Método para obtener el código del modelo del producto
     private function requireModelProducts(){
         require_once $this->modelProducts;
+    }
+
+    // Método para obtener el código del modelo del stock
+    private function requireModelStock(){
+        require_once $this->modelStock;
     }
 
     // Método para enviar los datos del formulario para añadir un producto
@@ -59,8 +74,10 @@ class InventoryController {
             $result = insertProduct($data);
 
             if ($result) {
+                $_SESSION['toast'] = array('exito' => true, 'header' => "¡Producto agregado!", 'body' => 'El producto indicado ha sido registrado con éxito');
                 return json_encode(array('exito' => true));
             } else {
+                $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'El producto indicado no ha sido registrado, pruebe más tarde');
                 return json_encode(array('exito' => false));
             }
         }
@@ -84,8 +101,10 @@ class InventoryController {
             $result = updateProduct($data);
 
             if ($result) {
+                $_SESSION['toast'] = array('exito' => true, 'header' => "¡Producto actualizado!", 'body' => 'El producto indicado ha sido actualizado con éxito');
                 return json_encode(array('exito' => true));
             } else {
+                $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'El producto indicado no ha sido actualizada, pruebe más tarde');
                 return json_encode(array('exito' => false));
             }
         }
@@ -101,13 +120,53 @@ class InventoryController {
         // Se elimina el registro
         $result = deleteProduct($data);
 
-        header("Location: index.php?controller=InventoryController&action=loadPage");
+        if ($result) {
+            $_SESSION['toast'] = array('exito' => true, 'header' => "!Producto eliminado!", 'body' => 'El producto indicado ha sido eliminado con éxito');
+        } else {
+            $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'El producto indicado no ha sido eliminado, pruebe más tarde');
+        }
 
-        // if ($result) {
-        //     return json_encode(array('exito' => true));
-        // } else {
-        //     return json_encode(array('exito' => false));
-        // }
+        header("Location: index.php?controller=InventoryController&action=loadPage");
+    }
+
+    // Método para actualizar el stock y los detalles del producto
+    public function addStockLog(){
+        if(isset($_POST['id']) && isset($_POST['ref']) && isset($_POST['units']) && isset($_POST['type']) && isset($_POST['user']) && isset($_POST['stock'])){
+            session_start(); // Se inicia la sesión
+            $this->requireModelStock(); // Se llama a los métodos del modelo de productos
+        
+            $ref =  $_POST['ref'];
+            $units =  $_POST['units'];
+            if ($_POST['type'] == 1){
+                $note = "El usuario ".$_POST['user']." agregó ".$units." unidades del producto al inventario";
+                $stock = $_POST['stock'] + $units;
+            } else {
+                $note = "El usuario ".$_POST['user']." venció ".$units." unidades del producto";
+                $stock = $_POST['stock'] - $units;
+            }
+            
+            $id = $_POST['id'];
+            $data = array('note'=>$note,'reference'=>$ref,'quantity'=>$units, 'id_user'=>$_SESSION['id'], 'id_store'=>$_SESSION['id_store'], 'id_product'=>$id); // Los valores a ingresar en un registro de producto
+            
+            // Se actualiza el registro
+            $result = insertStockLog($data);
+
+            if ($result) {
+                $data = array('stock'=>$stock, 'id'=>$id);
+                $result2 = updateStockProduct($data);
+
+                if ($result2) {
+                    $_SESSION['toast'] = array('exito' => true, 'header' => "¡El stock se actualizó!", 'body' => 'El producto ha sido actualizado con éxito');
+                    return json_encode(array('exito' => true));
+                } else {
+                    $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'El producto no ha sido actualizada, pruebe más tarde');
+                    return json_encode(array('exito' => false));
+                }
+            } else {
+                $_SESSION['toast'] = array('exito' => false, 'header' => "¡Sin éxito!", 'body' => 'El producto no ha sido actualizada, pruebe más tarde');
+                return json_encode(array('exito' => false));
+            }
+        }
     }
 }
 

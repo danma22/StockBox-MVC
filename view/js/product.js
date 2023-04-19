@@ -25,24 +25,7 @@ $(document).ready(function() {
                 url: "index.php?controller=InventoryController&action=addProducts",
                 data: $("#addProductForm").serialize(),
                 success: function(response) {
-                    response = JSON.parse(response);
-                    if (response.exito) {
-                        $("#toastHeader").html("¡Producto agregado!");
-                        $("#toastBody").html("El producto indicado ha sido registrada con éxito");
-                        $("#toast").removeClass("bg-danger");
-                        $("#toast").addClass("bg-success");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'))
-                        toast.show()
-                    }else{
-                        $("#toastHeader").html("¡Sin éxito!");
-                        $("#toastBody").html("El producto indicado no ha sido registrado, pruebe más tarde");
-                        $("#toast").removeClass("bg-success");
-                        $("#toast").addClass("bg-danger");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'));
-                        toast.show();
-                    }
+                    window.location.href = "index.php?controller=InventoryController&action=loadPage"
                 }
             });
         } else {
@@ -52,24 +35,7 @@ $(document).ready(function() {
                 url: "index.php?controller=InventoryController&action=updProducts",
                 data: $("#addProductForm").serialize(),
                 success: function(response) {
-                    response = JSON.parse(response);
-                    if (response.exito) {
-                        $("#toastHeader").html("¡Producto actualizado!");
-                        $("#toastBody").html("El producto indicada ha sido actualizado con éxito");
-                        $("#toast").removeClass("bg-danger");
-                        $("#toast").addClass("bg-success");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'));
-                        toast.show();
-                    }else{
-                        $("#toastHeader").html("¡Sin éxito!");
-                        $("#toastBody").html("El producto indicado no ha sido actualizada, pruebe más tarde");
-                        $("#toast").removeClass("bg-success");
-                        $("#toast").addClass("bg-danger");
-                        
-                        const toast = new bootstrap.Toast(document.getElementById('toast'));
-                        toast.show();
-                    }
+                    window.location.href = "index.php?controller=InventoryController&action=loadPage"
                 }
             });
         }
